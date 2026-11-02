@@ -1,7 +1,7 @@
 {
   "project": "certrelay",
   "verification_date": "2026-11-01",
-  "python_tests": 15,
+  "python_tests": 19,
   "python_statement_branch_coverage_percent": 88.72,
   "python_coverage_scope": "entire app package, including startup and optional collectors",
   "typescript_tests": 2,
@@ -38,5 +38,6 @@
     "actions": 5,
     "strict_extra_fields": "forbidden"
   },
-  "sample_sha256": "e5ac5e1a8c07208fe827399197806bcd1017dd38d7d8abe9d619a894ff88657c"
+  "sample_sha256": "e5ac5e1a8c07208fe827399197806bcd1017dd38d7d8abe9d619a894ff88657c",
+  "public_artifact_boundary": "explicit file allowlist, private test state excluded, marker rejection and guarded upload"
 }

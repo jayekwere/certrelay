@@ -29,7 +29,7 @@ jobs:
 
       - run: npm run verify
       - run: mkdir -p artifacts && python -m app.cli demo > artifacts/output.json && python scripts/verify-demo.py artifacts/output.json
-      - run: python -m ruff check app tests && python -m ruff format --check app tests
+      - run: python -m ruff check app tests scripts && python -m ruff format --check app tests scripts
       - run: python -m mypy app
       - run: python -m pytest
       - run: npm audit --audit-level=high
@@ -47,14 +47,20 @@ jobs:
       - run: docker build -t certrelay:ci .
       - run: node scripts/container-smoke.mjs certrelay:ci
       - run: docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m --tmpfs /app/artifacts:uid=10001,gid=10001,mode=0700 certrelay:ci python -m app.cli demo > artifacts/container-demo.json
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+      - name: Validate public evidence boundary
+        id: evidence_guard
         if: always()
+        run: python scripts/check-artifacts.py
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always() && steps.evidence_guard.outcome == 'success'
         with:
           name: verification-evidence
           path: |
             coverage.xml
             docs/workbench.png
             samples/output.json
-            artifacts/
+            artifacts/output.json
+            artifacts/python-dependency-audit.json
+            artifacts/container-demo.json
           if-no-files-found: warn
           retention-days: 14

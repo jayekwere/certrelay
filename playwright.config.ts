@@ -8,6 +8,6 @@ export default defineConfig({
     url: "http://127.0.0.1:18224/health",
     reuseExistingServer: false,
     timeout: 30000,
-    env: { STATE_PATH: "artifacts/browser-state.db", PKI_ROOT: "artifacts/browser-pki" },
+    env: { STATE_PATH: ".local/browser-state.db", PKI_ROOT: ".local/browser-pki" },
   },
 });

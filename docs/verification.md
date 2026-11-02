@@ -11,3 +11,5 @@ The restricted Docker smoke check verifies a non-root UID, HTTP response and con
 Certificate signatures, serials, validity times, CRLs and derived receipt hashes vary. CI verifies the parsed certificate, revoked serial, expected denial and all ten real TLS checks with `scripts/verify-demo.py`, rather than comparing cryptographic output bytes to an old sample. The sample CSR is public fixture material; its generating private key is not stored. CA private keys never appear in CI artifacts.
 
 [Hosted Verify run 41370935453](https://github.com/jayekwere/certrelay/actions/runs/41370935453) passed at `34d61a050ece08a799dc3e5360d3d24b1e575678`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).
+
+Public CI artifacts use an explicit file allowlist and reject private-key markers. Browser state and disposable CA keys are kept in the ignored `.local` directory and are excluded from uploaded evidence. Earlier certificate-lab artifacts containing disposable private CA material were withdrawn. No account credential or externally trusted key was involved.
