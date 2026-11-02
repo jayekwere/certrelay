@@ -9,3 +9,5 @@ The restricted Docker smoke check verifies a non-root UID, HTTP response and con
 `docs/local-verification.json` records measured local results. `docs/hosted-verification.json`, after publication, identifies the exact hosted commit and Verify run. Green CI applies to that revision only and is not a guarantee of external account permissions, production scalability or absence of all vulnerabilities.
 
 Certificate signatures, serials, validity times, CRLs and derived receipt hashes vary. CI verifies the parsed certificate, revoked serial, expected denial and all ten real TLS checks with `scripts/verify-demo.py`, rather than comparing cryptographic output bytes to an old sample. The sample CSR is public fixture material; its generating private key is not stored. CA private keys never appear in CI artifacts.
+
+[Hosted Verify run 41370935453](https://github.com/jayekwere/certrelay/actions/runs/41370935453) passed at `34d61a050ece08a799dc3e5360d3d24b1e575678`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).

@@ -21,5 +21,22 @@
     "local acceptance only",
     "no security certification",
     "no complete vulnerability guarantee"
-  ]
+  ],
+  "browser": {
+    "tests": 1,
+    "desktop": "passed",
+    "mobile_390px": "passed",
+    "mocked_responses": false
+  },
+  "container": {
+    "nonroot_uid": 10001,
+    "read_only_root": "passed",
+    "capabilities": "dropped",
+    "offline_full_demo": "passed"
+  },
+  "schemas": {
+    "actions": 5,
+    "strict_extra_fields": "forbidden"
+  },
+  "sample_sha256": "e5ac5e1a8c07208fe827399197806bcd1017dd38d7d8abe9d619a894ff88657c"
 }

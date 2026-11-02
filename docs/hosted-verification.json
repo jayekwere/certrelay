@@ -1,0 +1,122 @@
+{
+  "repository": "https://github.com/jayekwere/certrelay",
+  "verified_commit": "34d61a050ece08a799dc3e5360d3d24b1e575678",
+  "workflow": "Verify",
+  "run_id": 41370935453,
+  "url": "https://github.com/jayekwere/certrelay/actions/runs/41370935453",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes -r requirements-dev.lock",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run verify",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run mkdir -p artifacts && python -m app.cli demo > artifacts/output.json && python scripts/verify-demo.py artifacts/output.json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check app tests && python -m ruff format --check app tests",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy app",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm audit --audit-level=high",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes -r requirements-audit.lock",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip_audit --disable-pip -r requirements.lock --format json > artifacts/python-dependency-audit.json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser and system dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:browser",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run docker build -t certrelay:ci .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/container-smoke.mjs certrelay:ci",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m --tmpfs /app/artifacts:uid=10001,gid=10001,mode=0700 certrelay:ci python -m app.cli demo > artifacts/container-demo.json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13109287273,
+      "name": "verification-evidence",
+      "digest": "sha256:a0c1d9af6769f9c20f83959433471266dfae941838e4d7ebdc5add5e5db3c42d",
+      "size_bytes": 191752,
+      "expires_at": "2026-11-16T01:10:24Z"
+    }
+  ],
+  "scope": "Actual hosted tests, exact or semantic demo checks, browser, runtime dependency advisories and restricted container checks at verified_commit. Documentation updates can have later commits."
+}
