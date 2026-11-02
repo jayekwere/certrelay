@@ -1,0 +1,25 @@
+{
+  "project": "certrelay",
+  "verification_date": "2026-11-01",
+  "python_tests": 15,
+  "python_statement_branch_coverage_percent": 88.72,
+  "python_coverage_scope": "entire app package, including startup and optional collectors",
+  "typescript_tests": 2,
+  "typescript_coverage_scope": "imported contract and resolver only, browser not included",
+  "lint": "passed",
+  "typechecking": "passed",
+  "runtime_advisory_audits": {
+    "python": "no reported vulnerabilities",
+    "node": "no high or critical reported vulnerabilities"
+  },
+  "native_accounts": {
+    "salesforce": "not_available",
+    "vanta": "not_available",
+    "aws": "contract_tests_only"
+  },
+  "limitations": [
+    "local acceptance only",
+    "no security certification",
+    "no complete vulnerability guarantee"
+  ]
+}

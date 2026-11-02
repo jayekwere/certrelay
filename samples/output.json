@@ -1,0 +1,225 @@
+{
+  "mode": "synthetic-offline",
+  "transcript": [
+    {
+      "step": "Submit a restricted local certificate request",
+      "result": {
+        "id": "api-one",
+        "name": "localhost",
+        "usage": "server",
+        "csr_pem": "-----BEGIN CERTIFICATE REQUEST-----\nMIH1MIGdAgEAMBQxEjAQBgNVBAMMCWxvY2FsaG9zdDBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABOJcrVsH7OTurfWGtHs1Bt9mvniDPv/H6N6L52GOg6iMPxvLf1k1\ngV+D+pO303aRpHKxMPY33hfoyPlv8adN0M+gJzAlBgkqhkiG9w0BCQ4xGDAWMBQG\nA1UdEQQNMAuCCWxvY2FsaG9zdDAKBggqhkjOPQQDAgNHADBEAiBSOfqeQHHJLQ5G\nEGQf3jP6YqzKdhcUgbEL+2rD0WnxRAIgOS6+5gFXaIk5gjGQ1g8hxTVD2jTRP1N+\nLOAuKcJM6S8=\n-----END CERTIFICATE REQUEST-----\n",
+        "lifetime_minutes": 10,
+        "renews": null,
+        "requested_by": "alex",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "status": "pending",
+        "approved_by": null,
+        "request_sha256": "633e8a23acd400b1d0b98d33472a69e880e9c1cef1049f2b68722c25dd881e71"
+      }
+    },
+    {
+      "step": "Reject issuance before independent approval",
+      "expected_denial": 403,
+      "reason": "Only the approved request holder may issue"
+    },
+    {
+      "step": "Approve the exact certificate request",
+      "result": {
+        "approved_by": "blair",
+        "csr_pem": "-----BEGIN CERTIFICATE REQUEST-----\nMIH1MIGdAgEAMBQxEjAQBgNVBAMMCWxvY2FsaG9zdDBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABOJcrVsH7OTurfWGtHs1Bt9mvniDPv/H6N6L52GOg6iMPxvLf1k1\ngV+D+pO303aRpHKxMPY33hfoyPlv8adN0M+gJzAlBgkqhkiG9w0BCQ4xGDAWMBQG\nA1UdEQQNMAuCCWxvY2FsaG9zdDAKBggqhkjOPQQDAgNHADBEAiBSOfqeQHHJLQ5G\nEGQf3jP6YqzKdhcUgbEL+2rD0WnxRAIgOS6+5gFXaIk5gjGQ1g8hxTVD2jTRP1N+\nLOAuKcJM6S8=\n-----END CERTIFICATE REQUEST-----\n",
+        "id": "api-one",
+        "lifetime_minutes": 10,
+        "name": "localhost",
+        "renews": null,
+        "request_sha256": "633e8a23acd400b1d0b98d33472a69e880e9c1cef1049f2b68722c25dd881e71",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "requested_by": "alex",
+        "status": "approved",
+        "usage": "server"
+      }
+    },
+    {
+      "step": "Sign the approved public request",
+      "result": {
+        "approved_by": "blair",
+        "csr_pem": "-----BEGIN CERTIFICATE REQUEST-----\nMIH1MIGdAgEAMBQxEjAQBgNVBAMMCWxvY2FsaG9zdDBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABOJcrVsH7OTurfWGtHs1Bt9mvniDPv/H6N6L52GOg6iMPxvLf1k1\ngV+D+pO303aRpHKxMPY33hfoyPlv8adN0M+gJzAlBgkqhkiG9w0BCQ4xGDAWMBQG\nA1UdEQQNMAuCCWxvY2FsaG9zdDAKBggqhkjOPQQDAgNHADBEAiBSOfqeQHHJLQ5G\nEGQf3jP6YqzKdhcUgbEL+2rD0WnxRAIgOS6+5gFXaIk5gjGQ1g8hxTVD2jTRP1N+\nLOAuKcJM6S8=\n-----END CERTIFICATE REQUEST-----\n",
+        "id": "api-one",
+        "lifetime_minutes": 10,
+        "name": "localhost",
+        "renews": null,
+        "request_sha256": "633e8a23acd400b1d0b98d33472a69e880e9c1cef1049f2b68722c25dd881e71",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "requested_by": "alex",
+        "status": "issued",
+        "usage": "server",
+        "serial": "65714251323241607933777917919595216517202021810",
+        "certificate_pem": "-----BEGIN CERTIFICATE-----\nMIIBzTCCAXKgAwIBAgIUC4K6m/9Z9HscxiwHbnotuBxhjbIwCgYIKoZIzj0EAwIw\nJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRpc3Bvc2FibGUgbGFiIENBMB4XDTI2MTEw\nMjAxMDYxM1oXDTI2MTEwMjAxMTY0M1owFDESMBAGA1UEAwwJbG9jYWxob3N0MFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4lytWwfs5O6t9Ya0ezUG32a+eIM+/8fo\n3ovnYY6DqIw/G8t/WTWBX4P6k7fTdpGkcrEw9jfeF+jI+W/xp03Qz6OBjzCBjDAM\nBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRZ1Aabku7Aj2S8nhgjr23jfgMwmDAfBgNV\nHSMEGDAWgBTX4cEKdKDk6u+Soj62/+y952PfOTAUBgNVHREEDTALgglsb2NhbGhv\nc3QwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgeAMAoGCCqG\nSM49BAMCA0kAMEYCIQCq7AWs1LcIKN2QIy5UR3XHnblee6EpNT5t+Qpbp/0aTwIh\nAIiKmnoBtb6NGEEgtKYRebvj8ItfUa6RXECco3ZUUxlp\n-----END CERTIFICATE-----\n",
+        "fingerprint_sha256": "6056e659b0a610daba4d1c346d4aa43e2ba8e2be803363f536aa5f8162cd9328",
+        "not_after": "2026-11-02T01:16:43+00:00",
+        "ca_pem": "-----BEGIN CERTIFICATE-----\nMIIBtTCCAVqgAwIBAgIUCS9CJQLk+T4luwOcun67jKz90vgwCgYIKoZIzj0EAwIw\nJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRpc3Bvc2FibGUgbGFiIENBMB4XDTI2MTEw\nMjAxMDU0M1oXDTI2MTEwOTAxMDY0M1owJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRp\nc3Bvc2FibGUgbGFiIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWQhyDW4O\n3n4P3EjWKU+1F9YKcW5IAqNxNBJr7unqULzx/4sDylwxtsorBeDW1GlmWdMN/IHf\nFGOYiw0H1wpFSKNmMGQwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU1+HB\nCnSg5OrvkqI+tv/svedj3zkwHwYDVR0jBBgwFoAU1+HBCnSg5OrvkqI+tv/svedj\n3zkwDgYDVR0PAQH/BAQDAgGGMAoGCCqGSM49BAMCA0kAMEYCIQCxhWIXNlg0PHyr\n21FaR4lVcQcxGEtMQkYDAQqa5j0AiwIhAKFT7PniJCwZj1TZrWzznO24QF9935Oe\n+h2NtDAS+2py\n-----END CERTIFICATE-----\n"
+      }
+    },
+    {
+      "step": "Revoke the issued certificate",
+      "result": {
+        "approved_by": "blair",
+        "ca_pem": "-----BEGIN CERTIFICATE-----\nMIIBtTCCAVqgAwIBAgIUCS9CJQLk+T4luwOcun67jKz90vgwCgYIKoZIzj0EAwIw\nJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRpc3Bvc2FibGUgbGFiIENBMB4XDTI2MTEw\nMjAxMDU0M1oXDTI2MTEwOTAxMDY0M1owJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRp\nc3Bvc2FibGUgbGFiIENBMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWQhyDW4O\n3n4P3EjWKU+1F9YKcW5IAqNxNBJr7unqULzx/4sDylwxtsorBeDW1GlmWdMN/IHf\nFGOYiw0H1wpFSKNmMGQwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQU1+HB\nCnSg5OrvkqI+tv/svedj3zkwHwYDVR0jBBgwFoAU1+HBCnSg5OrvkqI+tv/svedj\n3zkwDgYDVR0PAQH/BAQDAgGGMAoGCCqGSM49BAMCA0kAMEYCIQCxhWIXNlg0PHyr\n21FaR4lVcQcxGEtMQkYDAQqa5j0AiwIhAKFT7PniJCwZj1TZrWzznO24QF9935Oe\n+h2NtDAS+2py\n-----END CERTIFICATE-----\n",
+        "certificate_pem": "-----BEGIN CERTIFICATE-----\nMIIBzTCCAXKgAwIBAgIUC4K6m/9Z9HscxiwHbnotuBxhjbIwCgYIKoZIzj0EAwIw\nJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRpc3Bvc2FibGUgbGFiIENBMB4XDTI2MTEw\nMjAxMDYxM1oXDTI2MTEwMjAxMTY0M1owFDESMBAGA1UEAwwJbG9jYWxob3N0MFkw\nEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4lytWwfs5O6t9Ya0ezUG32a+eIM+/8fo\n3ovnYY6DqIw/G8t/WTWBX4P6k7fTdpGkcrEw9jfeF+jI+W/xp03Qz6OBjzCBjDAM\nBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRZ1Aabku7Aj2S8nhgjr23jfgMwmDAfBgNV\nHSMEGDAWgBTX4cEKdKDk6u+Soj62/+y952PfOTAUBgNVHREEDTALgglsb2NhbGhv\nc3QwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgeAMAoGCCqG\nSM49BAMCA0kAMEYCIQCq7AWs1LcIKN2QIy5UR3XHnblee6EpNT5t+Qpbp/0aTwIh\nAIiKmnoBtb6NGEEgtKYRebvj8ItfUa6RXECco3ZUUxlp\n-----END CERTIFICATE-----\n",
+        "csr_pem": "-----BEGIN CERTIFICATE REQUEST-----\nMIH1MIGdAgEAMBQxEjAQBgNVBAMMCWxvY2FsaG9zdDBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABOJcrVsH7OTurfWGtHs1Bt9mvniDPv/H6N6L52GOg6iMPxvLf1k1\ngV+D+pO303aRpHKxMPY33hfoyPlv8adN0M+gJzAlBgkqhkiG9w0BCQ4xGDAWMBQG\nA1UdEQQNMAuCCWxvY2FsaG9zdDAKBggqhkjOPQQDAgNHADBEAiBSOfqeQHHJLQ5G\nEGQf3jP6YqzKdhcUgbEL+2rD0WnxRAIgOS6+5gFXaIk5gjGQ1g8hxTVD2jTRP1N+\nLOAuKcJM6S8=\n-----END CERTIFICATE REQUEST-----\n",
+        "fingerprint_sha256": "6056e659b0a610daba4d1c346d4aa43e2ba8e2be803363f536aa5f8162cd9328",
+        "id": "api-one",
+        "lifetime_minutes": 10,
+        "name": "localhost",
+        "not_after": "2026-11-02T01:16:43+00:00",
+        "renews": null,
+        "request_sha256": "633e8a23acd400b1d0b98d33472a69e880e9c1cef1049f2b68722c25dd881e71",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "requested_by": "alex",
+        "serial": "65714251323241607933777917919595216517202021810",
+        "status": "revoked",
+        "usage": "server",
+        "revocation_reason": "retired",
+        "revoked_at": "2026-11-01T12:00:00Z",
+        "revoked_by": "blair"
+      }
+    },
+    {
+      "step": "Reject reissuance of the revoked request",
+      "expected_denial": 403,
+      "reason": "Only the approved request holder may issue"
+    },
+    {
+      "step": "Export the signed revocation list",
+      "result": {
+        "crl_pem": "-----BEGIN X509 CRL-----\nMIHWMH4CAQEwCgYIKoZIzj0EAwIwJjEkMCIGA1UEAwwbQ2VydFJlbGF5IGRpc3Bv\nc2FibGUgbGFiIENBFw0yNjExMDIwMTA2NDJaFw0yNjExMDIwMTE2NDNaMCcwJQIU\nC4K6m/9Z9HscxiwHbnotuBxhjbIXDTI2MTEwMjAxMDY0M1owCgYIKoZIzj0EAwID\nSAAwRQIhAJ/ZQYn2uMFOAu0sHdY2XHVtbyG/annEqXy+HPI8rIfpAiA5G5pY7Znq\nTK22Vw6Kd6jxm88sr5FmcNYKeV1JIjvplA==\n-----END X509 CRL-----\n",
+        "enforcement": "relying_services_must_load_current_crl"
+      }
+    },
+    {
+      "step": "Reject certificate access across tenants",
+      "expected_denial": 404,
+      "reason": "Record not found"
+    }
+  ],
+  "summary": {
+    "certificates": [
+      {
+        "approved_by": "blair",
+        "fingerprint_sha256": "6056e659b0a610daba4d1c346d4aa43e2ba8e2be803363f536aa5f8162cd9328",
+        "id": "api-one",
+        "lifetime_minutes": 10,
+        "name": "localhost",
+        "not_after": "2026-11-02T01:16:43+00:00",
+        "renews": null,
+        "request_sha256": "633e8a23acd400b1d0b98d33472a69e880e9c1cef1049f2b68722c25dd881e71",
+        "requested_at": "2026-11-01T12:00:00Z",
+        "requested_by": "alex",
+        "revocation_reason": "retired",
+        "revoked_at": "2026-11-01T12:00:00Z",
+        "revoked_by": "blair",
+        "serial": "65714251323241607933777917919595216517202021810",
+        "status": "revoked",
+        "usage": "server",
+        "expired": false
+      }
+    ],
+    "scope": "disposable_local_private_ca",
+    "revocation": "renewal_blocked_and_crl_exported_relying_services_must_enforce"
+  },
+  "evidence": {
+    "tenant": "alder",
+    "integrity": "verified_local_chain",
+    "checkpoint": "57647d974e48542764b579e16e2bd6437ba9cc13c3993f931368cca95d308839",
+    "events": [
+      {
+        "payload": {
+          "action": "request-certificate",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "d701e8e0025dad604c143ef5ba442009468346e97bc6f4d5586c44783253c928",
+          "result_sha256": "5c51245a662ebf77c9ed117e8c328702e706441f0a648d469a06a7e5f6ccb174",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+        "hash": "653f53520114d6ee40643e68eff47690dd099f17ff23060235cbbf3f0fd61189"
+      },
+      {
+        "payload": {
+          "action": "approve-certificate",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "0c7db927bbf33fe3cde5698333aa4b8ef4c55d2440658b25a4a6130a7ac9a5a3",
+          "result_sha256": "adb08833c89985a7a7d08ad42c2bbcc274deed87df19069a13aab25664378cfa",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "653f53520114d6ee40643e68eff47690dd099f17ff23060235cbbf3f0fd61189",
+        "hash": "49b05c47dce77ccd4b12087c91330ff628eaab7929751b20879b6a94e752e97e"
+      },
+      {
+        "payload": {
+          "action": "issue-certificate",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "a6d8be9fb0875735f7d470954aead70c8b989745a886c4cd51a1337e755d1314",
+          "result_sha256": "f59e3670bd87cbe5b7e859c6afd3a8f0f7fdfffcc24d457d016bf1fcc37da23d",
+          "subject": "alex",
+          "tenant": "alder"
+        },
+        "previous": "49b05c47dce77ccd4b12087c91330ff628eaab7929751b20879b6a94e752e97e",
+        "hash": "79ca3aaad42d65dda2956625e22baf74606d580302d9d67630d51ddc310bf5c2"
+      },
+      {
+        "payload": {
+          "action": "revoke-certificate",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "b01b86b859bacd6474000522f1a3513c91876b72fb332f2ebd25ce5ffb23f3c4",
+          "result_sha256": "7f58494f1af222749c9a983c1f8d665396a59e3d0652a7bfecf5ed0195f56ff4",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "79ca3aaad42d65dda2956625e22baf74606d580302d9d67630d51ddc310bf5c2",
+        "hash": "c9babe70919ebd6edadb7a2a5b2f756729cb510d798c9fe8b70d60b6fbb67d3f"
+      },
+      {
+        "payload": {
+          "action": "export-crl",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "7960b47dad18b324c48e550491acc3cebcff25f2d25e4d255818763c5489de98",
+          "result_sha256": "c3757f4541b40fb1142bf07d1e78a1b599a40ea9c5f01dae6007f4275957945c",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "c9babe70919ebd6edadb7a2a5b2f756729cb510d798c9fe8b70d60b6fbb67d3f",
+        "hash": "782d3e6aaeb5c6acd61b2dbb04a0426b97ff7b36ef95efc01ee8e4da9cc110a5"
+      },
+      {
+        "payload": {
+          "action": "read-summary",
+          "at": "2026-11-01T12:00:00Z",
+          "request_sha256": "d7b149571eead77610e840d582a19bb9543143d5009358463fb0f3423f4d4067",
+          "result_sha256": "ed4881dfe5ddac350fdd687939967038682db780c94c2d6ac33575c6de2240f2",
+          "subject": "blair",
+          "tenant": "alder"
+        },
+        "previous": "782d3e6aaeb5c6acd61b2dbb04a0426b97ff7b36ef95efc01ee8e4da9cc110a5",
+        "hash": "57647d974e48542764b579e16e2bd6437ba9cc13c3993f931368cca95d308839"
+      }
+    ]
+  },
+  "tls_demo": {
+    "transport": "actual-loopback-tls",
+    "checks": {
+      "trusted_mutual_tls": true,
+      "missing_client_rejected": true,
+      "untrusted_client_rejected": true,
+      "unauthorized_identity_rejected": true,
+      "wrong_hostname_rejected": true,
+      "untrusted_server_rejected": true,
+      "rotated_connection_succeeds": true,
+      "leaf_fingerprint_changed": true,
+      "expired_server_rejected": true,
+      "revoked_client_rejected_new_handshake": true
+    },
+    "revocation": "CRL_enforced_at_new_handshake",
+    "existing_sessions": "not_terminated_by_certificate_revocation"
+  }
+}

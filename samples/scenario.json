@@ -1,0 +1,84 @@
+{
+  "intro": "Approve an exact public signing request, issue a short-lived local certificate and revoke it with a CRL export.",
+  "steps": [
+    {
+      "id": "request",
+      "title": "Submit a restricted local certificate request",
+      "action": "request-certificate",
+      "data": {
+        "id": "api-one",
+        "name": "localhost",
+        "usage": "server",
+        "csr_pem": "-----BEGIN CERTIFICATE REQUEST-----\nMIH1MIGdAgEAMBQxEjAQBgNVBAMMCWxvY2FsaG9zdDBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABOJcrVsH7OTurfWGtHs1Bt9mvniDPv/H6N6L52GOg6iMPxvLf1k1\ngV+D+pO303aRpHKxMPY33hfoyPlv8adN0M+gJzAlBgkqhkiG9w0BCQ4xGDAWMBQG\nA1UdEQQNMAuCCWxvY2FsaG9zdDAKBggqhkjOPQQDAgNHADBEAiBSOfqeQHHJLQ5G\nEGQf3jP6YqzKdhcUgbEL+2rD0WnxRAIgOS6+5gFXaIk5gjGQ1g8hxTVD2jTRP1N+\nLOAuKcJM6S8=\n-----END CERTIFICATE REQUEST-----\n",
+        "lifetime_minutes": 10
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "denied",
+      "title": "Reject issuance before independent approval",
+      "action": "issue-certificate",
+      "data": {
+        "id": "api-one"
+      },
+      "identity": "demo-operator",
+      "expect_error": 403
+    },
+    {
+      "id": "approved",
+      "title": "Approve the exact certificate request",
+      "action": "approve-certificate",
+      "data": {
+        "id": "api-one",
+        "request_sha256": "$request.request_sha256"
+      },
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "issued",
+      "title": "Sign the approved public request",
+      "action": "issue-certificate",
+      "data": {
+        "id": "api-one"
+      },
+      "identity": "demo-operator"
+    },
+    {
+      "id": "revoke",
+      "title": "Revoke the issued certificate",
+      "action": "revoke-certificate",
+      "data": {
+        "id": "api-one",
+        "reason": "retired"
+      },
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "blocked",
+      "title": "Reject reissuance of the revoked request",
+      "action": "issue-certificate",
+      "data": {
+        "id": "api-one"
+      },
+      "identity": "demo-operator",
+      "expect_error": 403
+    },
+    {
+      "id": "crl",
+      "title": "Export the signed revocation list",
+      "action": "export-crl",
+      "data": {},
+      "identity": "demo-reviewer"
+    },
+    {
+      "id": "boundary",
+      "title": "Reject certificate access across tenants",
+      "action": "issue-certificate",
+      "data": {
+        "id": "api-one"
+      },
+      "identity": "demo-other",
+      "expect_error": 404
+    }
+  ]
+}

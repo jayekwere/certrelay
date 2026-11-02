@@ -1,0 +1,12 @@
+services:
+  certrelay:
+    build: .
+    ports: ["127.0.0.1:8080:8080"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:rw,nosuid,size=64m
+      - /app/artifacts:uid=10001,gid=10001,mode=0700
+    mem_limit: 256m
+    pids_limit: 128

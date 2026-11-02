@@ -1,0 +1,11 @@
+.git
+node_modules
+.venv
+.cache
+__pycache__
+artifacts
+.local
+*.pem
+*.key
+*.db*
+.env*

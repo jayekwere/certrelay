@@ -1,0 +1,131 @@
+{
+  "request-certificate": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "enum": [
+          "localhost",
+          "api.certrelay.test",
+          "database.certrelay.test",
+          "operator.certrelay.test"
+        ],
+        "title": "Name",
+        "type": "string"
+      },
+      "usage": {
+        "enum": [
+          "server",
+          "client"
+        ],
+        "title": "Usage",
+        "type": "string"
+      },
+      "csr_pem": {
+        "maxLength": 4096,
+        "minLength": 100,
+        "title": "Csr Pem",
+        "type": "string"
+      },
+      "lifetime_minutes": {
+        "maximum": 60,
+        "minimum": 1,
+        "title": "Lifetime Minutes",
+        "type": "integer"
+      },
+      "renews": {
+        "anyOf": [
+          {
+            "pattern": "^[a-z][a-z0-9-]{0,63}$",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Renews"
+      }
+    },
+    "required": [
+      "id",
+      "name",
+      "usage",
+      "csr_pem",
+      "lifetime_minutes"
+    ],
+    "title": "CertificateRequest",
+    "type": "object"
+  },
+  "approve-certificate": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "request_sha256": {
+        "pattern": "^[a-f0-9]{64}$",
+        "title": "Request Sha256",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "request_sha256"
+    ],
+    "title": "Approval",
+    "type": "object"
+  },
+  "issue-certificate": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id"
+    ],
+    "title": "Ref",
+    "type": "object"
+  },
+  "revoke-certificate": {
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "pattern": "^[a-z][a-z0-9-]{0,63}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "reason": {
+        "enum": [
+          "key-compromise",
+          "retired",
+          "superseded"
+        ],
+        "title": "Reason",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "reason"
+    ],
+    "title": "Revocation",
+    "type": "object"
+  },
+  "export-crl": {
+    "additionalProperties": false,
+    "properties": {},
+    "title": "Contract",
+    "type": "object"
+  }
+}

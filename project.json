@@ -1,0 +1,5 @@
+{
+  "name": "certrelay",
+  "title": "CertRelay",
+  "description": "Private certificate lifecycle lab with reviewed issuance, real mutual TLS, rotation and enforced revocation tests."
+}

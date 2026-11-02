@@ -1,0 +1,60 @@
+name: Verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.14'
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci --ignore-scripts
+
+      - run: npm run verify
+      - run: mkdir -p artifacts && python -m app.cli demo > artifacts/output.json && python scripts/verify-demo.py artifacts/output.json
+      - run: python -m ruff check app tests && python -m ruff format --check app tests
+      - run: python -m mypy app
+      - run: python -m pytest
+      - run: npm audit --audit-level=high
+      - run: python -m pip install --require-hashes -r requirements-audit.lock
+      - run: python -m pip_audit --disable-pip -r requirements.lock --format json > artifacts/python-dependency-audit.json
+      - name: Install browser and system dependencies
+        timeout-minutes: 5
+        run: |
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
+          fi
+          printf '%s\n' 'Acquire::http::Timeout "20";' 'Acquire::https::Timeout "20";' 'Acquire::Retries "2";' | sudo tee /etc/apt/apt.conf.d/99-ci-network-timeouts > /dev/null
+          npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: docker build -t certrelay:ci .
+      - run: node scripts/container-smoke.mjs certrelay:ci
+      - run: docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m --tmpfs /app/artifacts:uid=10001,gid=10001,mode=0700 certrelay:ci python -m app.cli demo > artifacts/container-demo.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: verification-evidence
+          path: |
+            coverage.xml
+            docs/workbench.png
+            samples/output.json
+            artifacts/
+          if-no-files-found: warn
+          retention-days: 14
