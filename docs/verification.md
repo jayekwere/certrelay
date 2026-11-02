@@ -13,3 +13,5 @@ Certificate signatures, serials, validity times, CRLs and derived receipt hashes
 [Hosted Verify run 41370935453](https://github.com/jayekwere/certrelay/actions/runs/41370935453) passed at `34d61a050ece08a799dc3e5360d3d24b1e575678`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).
 
 Public CI artifacts use an explicit file allowlist and reject private-key markers. Browser state and disposable CA keys are kept in the ignored `.local` directory and are excluded from uploaded evidence. Earlier certificate-lab artifacts containing disposable private CA material were withdrawn. No account credential or externally trusted key was involved.
+
+[Hosted Verify run 41371629929](https://github.com/jayekwere/certrelay/actions/runs/41371629929) passed at `c5dfdddee778adee4c63d3581598039e71c8c96a`. Exact jobs, steps and artifact digests are recorded in [the hosted receipt](hosted-verification.json).
